@@ -1,6 +1,8 @@
 import express from 'express';
 import bcrypt from 'bcryptjs';
 import User from '../models/User.js';
+import jwt from 'jsonwebtoken';
+
 
 const router = express.Router();
 
@@ -32,3 +34,33 @@ router.post('/register', async (req, res) => {
         res.status|(500).json( {massage: "Server error", error: error.message});
     }
 });
+
+router.post('/login', async (req,res) => {
+    const {email, password} = req.body;
+
+    try {
+        // Find the user by mail:
+        const user = await User.findOne({ email });
+        if (!user){
+            return res.status(401).json({message: "Invalid credentials."});
+        }       
+        
+        // Compare passwords:
+        const isMatch = await bcrypt.compare(password, user.password)
+        if (!isMatch){
+            return res.status(401).json({message: "Invalid credentials."});
+        }
+
+        // Create JWT 
+        const payload = { userId: user._id };
+        const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '1h'});
+
+        // res:
+        res.json( { token, user: { id:user._id, name: user.name, email: user.email }});
+
+    } catch (error) {
+        res.status(500).json({ massage: "Server error" , error: error.massage });
+    }
+})
+
+export default router;
