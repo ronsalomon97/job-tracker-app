@@ -2,7 +2,7 @@ import React from 'react';
 
 function JobCard({ job, onClick }) {
     return (
-        <div onClick={inClick} className='job-card'>
+        <div onClick={onClick} className='job-card'>
             <h2 className='job-card-company'>{job.company}</h2>
             <p className='job-card-title'>{job.title}</p>
             <div className="job-card-info">
