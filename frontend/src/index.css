@@ -1,3 +1,103 @@
+/* src/index.css */
+
+/* Global Tailwind imports */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Custom CSS for our Job Tracker App */
+
+/* Dashboard container */
+.dashboard-container {
+  @apply min-h-screen bg-gray-100 p-4;
+}
+
+/* Navbar */
+.dashboard-navbar {
+  @apply flex justify-between items-center mb-4;
+}
+.dashboard-title {
+  @apply text-2xl font-bold;
+}
+
+/* Jobs Grid */
+.jobs-grid {
+  @apply grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3;
+}
+
+/* Floating Add Button */
+.floating-add-button {
+  @apply fixed bottom-8 right-8 bg-blue-600 text-white p-4 rounded-full shadow-lg hover:bg-blue-700;
+}
+
+/* Job Card */
+.job-card {
+  @apply cursor-pointer p-4 bg-white rounded-lg shadow hover:shadow-md transition-shadow;
+}
+.job-card-company {
+  @apply text-lg font-semibold;
+}
+.job-card-title {
+  @apply text-sm text-gray-600;
+}
+.job-card-info {
+  @apply mt-2 flex justify-between;
+}
+.job-card-status {
+  @apply text-sm font-medium;
+}
+.job-card-date {
+  @apply text-xs text-gray-500;
+}
+
+/* Modal Styles */
+.modal-overlay {
+  @apply fixed inset-0 z-50 overflow-y-auto;
+}
+.modal-backdrop {
+  @apply fixed inset-0 bg-black opacity-30;
+}
+.modal-container {
+  @apply min-h-screen px-4 text-center;
+}
+.modal-center-helper {
+  @apply inline-block h-screen align-middle;
+}
+.modal-content {
+  @apply inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-lg;
+}
+.modal-title {
+  @apply text-lg font-medium leading-6 text-gray-900;
+}
+.modal-body {
+  @apply mt-4;
+}
+
+/* Job Form Styles */
+.job-form {
+  @apply space-y-4;
+}
+.form-group {
+  @apply mb-4;
+}
+.form-label {
+  @apply block text-sm font-medium text-gray-700;
+}
+.form-input {
+  @apply mt-1 block w-full border-gray-300 rounded-md shadow-sm;
+}
+.form-select {
+  @apply mt-1 block w-full border-gray-300 rounded-md shadow-sm;
+}
+.form-textarea {
+  @apply mt-1 block w-full border-gray-300 rounded-md shadow-sm;
+}
+.form-actions {
+  @apply flex justify-end space-x-2;
+}
+.cancel-button {
+  @apply px-4 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400;
+}
+.submit-button {
+  @apply px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700;
+}

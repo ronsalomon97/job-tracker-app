@@ -18,7 +18,12 @@ function Dashboard() {
     useEffect(() => {
         const token = localStorage.getItem('token');
         axios.get('/api/jobs', {headers: {Authorization: `Bearer${token}`}})
-        .then(response => setJobs(response.data))
+        .then(response =>{ 
+            console.log('Fetched jobs:', response.data);
+            setJobs(response.data)
+        
+        }
+        )
         .catch(error => console.error('Error fetching jobs:' , error));
     },[]);
 
