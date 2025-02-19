@@ -61,14 +61,14 @@ function Register(){
                             />
                     </div>
 
-                    <div className='form-group'>
-                        <label className='form-label'>Password:</label>
+                    <div className="form-group">
+                        <label className="form-label">Password:</label>
                             <input
                                 type="password"
                                 value={password}
-                                onChange={(e) => setPassword(e.target.password)}
-                                placeholder='Enter your password'
-                                className='form-input'
+                                onChange={(e) => setPassword(e.target.value)}
+                                placeholder="Enter your password"
+                                className="form-input"
                                 required
                             />
                     </div>

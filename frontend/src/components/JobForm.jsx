@@ -124,4 +124,4 @@ function JobForm({ initialData, onSubmit, onCancel}){
         </form>
     );
 }
-export default JobForm
+export default JobForm;

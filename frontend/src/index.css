@@ -5,9 +5,9 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Custom CSS for our Job Tracker App */
+/* --- Custom CSS for Job Tracker App --- */
 
-/* Dashboard container */
+/* Dashboard Container */
 .dashboard-container {
   @apply min-h-screen bg-gray-100 p-4;
 }
@@ -83,14 +83,10 @@
 .form-label {
   @apply block text-sm font-medium text-gray-700;
 }
-.form-input {
-  @apply mt-1 block w-full border-gray-300 rounded-md shadow-sm;
-}
-.form-select {
-  @apply mt-1 block w-full border-gray-300 rounded-md shadow-sm;
-}
+.form-input,
+.form-select,
 .form-textarea {
-  @apply mt-1 block w-full border-gray-300 rounded-md shadow-sm;
+  @apply mt-1 block w-full border border-gray-300 rounded-md p-2;
 }
 .form-actions {
   @apply flex justify-end space-x-2;
@@ -100,4 +96,29 @@
 }
 .submit-button {
   @apply px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700;
+}
+
+/* Authentication Page Styles */
+.auth-container {
+  @apply flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4;
+}
+.auth-title {
+  @apply text-3xl font-bold mb-6;
+}
+.auth-form {
+  @apply w-full max-w-md bg-white p-6 rounded-lg shadow;
+}
+.link-button {
+  @apply text-blue-600 hover:underline;
+}
+.error-message {
+  @apply text-red-600 text-sm;
+}
+
+/* Analytics Page Styles (Optional) */
+.analytics-container {
+  @apply p-4;
+}
+.chart-container {
+  @apply mt-4;
 }

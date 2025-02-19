@@ -8,7 +8,7 @@ function JobCard({ job, onClick }) {
             <div className="job-card-info">
                 <span className='job-card-status'>{job.status}</span>
                 <span className='job-card-date'>
-                    {new date(job.dateApplied).toLocaleDateString()}
+                    {new Date(job.dateApplied).toLocaleDateString()}
                 </span>
             </div>    
         </div>
