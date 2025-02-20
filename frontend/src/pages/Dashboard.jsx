@@ -66,10 +66,12 @@ function Dashboard() {
 
   return (
     <div className="dashboard-container">
-      <header className="dashboard-navbar">
-        <h1 className="dashboard-title">Job Tracker App</h1>
-        {/* Future: Add navigation links */}
-      </header>
+        <header className="dashboard-navbar">
+            <h1 className="dashboard-title">Job Tracker App</h1>
+            <nav>
+                <a href="/analytics" className="text-blue-600 hover:underline">Analytics</a>
+            </nav>      
+        </header>
 
       {/* Jobs Grid */}
       <div className="jobs-grid">
