@@ -57,8 +57,8 @@
 .modal-content {
   @apply fixed top-1/2 left-1/2 w-11/12 max-w-lg p-6 overflow-y-auto rounded-lg shadow-xl z-50 transform -translate-x-1/2 -translate-y-1/2;
   max-height: 90vh;
-  background: #ffffff !important;  /* Force a solid white background */
-  color: #000000 !important;        /* Force dark text */
+  background: #ffffff !important;
+  color: #000000 !important;
 }
 .modal-title {
   @apply text-lg font-medium mb-4;
@@ -109,15 +109,40 @@
   @apply text-red-600 text-sm;
 }
 
-/* Analytics Page Styles (Updated with Readable Class Names) */
+/* Analytics Page Styles */
 .analytics-page {
-  @apply p-6;  /* Adjust padding as needed */
+  @apply p-6;
+}
+.analytics-navbar {
+  @apply flex justify-between items-center mb-6;
 }
 .analytics-title {
-  @apply text-2xl font-bold mb-6;
+  @apply text-2xl font-bold;
 }
-.analytics-chart-container {
+.analytics-nav {
+  /* Add extra styles here if needed */
+}
+.nav-link-dashboard {
+  @apply text-blue-600 hover:underline;
+}
+.analytics-charts-wrapper {
   @apply mt-4;
+}
+.chart-section {
+  @apply mb-8;
+}
+.chart-section-title {
+  @apply text-xl font-semibold mb-2;
+}
+.pie-chart-wrapper {
+  width: 300px;
+  height: 300px;
+  margin: 0 auto;
+}
+.bar-chart-wrapper {
+  width: 100%;
+  height: 300px;
+  margin: 0 auto;
 }
 .analytics-metrics {
   @apply mt-6;
