@@ -1,6 +1,7 @@
 import express from 'express';
 import Job from '../models/Job.js';
 import authMiddleware from '../middleware/authMiddleware.js';
+import { Mongoose } from 'mongoose';
 const router = express.Router(); 
 
 router.post ('/' , authMiddleware, async (req,res) => {
@@ -66,7 +67,7 @@ router.get('/:id', authMiddleware, async (req, res) => {
       res.status(500).json({ message: "Error updating job", error: error.message });
     }
   });
-  
+
   router.delete('/:id', authMiddleware, async (req, res) => {
     try {
       const deletedJob = await Job.findOneAndDelete({ _id: req.params.id, user: req.userId });
@@ -90,80 +91,79 @@ router.get('/:id', authMiddleware, async (req, res) => {
     }
   });
   
+  router.get('/stats', authMiddleware, async (req,res) => {
+    try {
+        // Group by job status to get counts for each status:
+        const statusStats = await Job.aggregate([
+            {
+                $match: {
+                    user: mongoose.Types.ObjectId(req.userId) 
+                }
+            },
+            {
+                $group: {
+                    _id: "$status",
+                    count: { $sum: 1 }
+                }
+            }
+        ]);
+
+        // Group by year and month to create a time trend:
+        const trendStats = await Job.aggregate([
+            {
+                $match: { 
+                    user: mongoose.Types.ObjectId(req.userId) 
+                }
+            },
+            {
+                $group: {
+                    _id: {
+                      year: { $year: "$dateApplied" },
+                      month: { $month: "$dateApplied" }
+                    },
+                    count: { $sum: 1 }
+                  }
+            },
+            {
+                $sort: { "_id.year": 1, "_id.month": 1 }
+            }
+        ]);
+
+        // Calculate additional metrics:
+        const totalJobsResult = await Job.aggregate([
+            {
+              $match: { 
+                user: mongoose.Types.ObjectId(req.userId)
+              }
+            },
+            {
+              $group: {
+                _id: null,
+                totalJobs: { $sum: 1 }
+              }
+            }
+          ]);
+        const totalJobs = totalJobsResult.length ? totalJobsResult[0].totalJobs : 0;
+        // Here we assume trendStats has one entry per month.
+        const months = trendStats.length;
+        const avgJobsPerMonth = months > 0 ? totalJobs / months : 0;
+
+        res.json({
+            statusStats,
+            trendStats, 
+            additionalMetrics: {
+                totalJobs,
+                months,
+                avgJobsPerMonth
+            }
+        });
+    } 
+    catch (error) {
+        console.error("Error fetching stats:", error);
+        res.status(500).json({message: "Error fetching status", error: error.message});
+    }
+  });
 
   export default router;
 
-// More complex stats ----------------------------- Maybe add later 
-
-//   router.get('/stats', authMiddleware, async (req, res) => {
-//     try {
-//       // 1. Group by job status to get counts for each status.
-//       const statusStats = await Job.aggregate([
-//         {
-//           $match: {
-//             user: mongoose.Types.ObjectId(req.userId)
-//           }
-//         },
-//         {
-//           $group: {
-//             _id: "$status",
-//             count: { $sum: 1 }
-//           }
-//         }
-//       ]);
-  
-//       // 2. Group by year and month to create a time trend.
-//       //    This groups jobs by the year and month extracted from the dateApplied field.
-//       const trendStats = await Job.aggregate([
-//         {
-//           $match: {
-//             user: mongoose.Types.ObjectId(req.userId)
-//           }
-//         },
-//         {
-//           $group: {
-//             _id: {
-//               year: { $year: "$dateApplied" },
-//               month: { $month: "$dateApplied" }
-//             },
-//             count: { $sum: 1 }
-//           }
-//         },
-//         {
-//           $sort: { "_id.year": 1, "_id.month": 1 }
-//         }
-//       ]);
-  
-//       // 3. (Optional) Calculate additional metrics, e.g., average per month.
-//       //    This example calculates the average number of jobs per month.
-//       const totalJobsResult = await Job.aggregate([
-//         {
-//           $match: {
-//             user: mongoose.Types.ObjectId(req.userId)
-//           }
-//         },
-//         {
-//           $group: {
-//             _id: null,
-//             totalJobs: { $sum: 1 }
-//           }
-//         }
-//       ]);
-//       const totalJobs = totalJobsResult.length ? totalJobsResult[0].totalJobs : 0;
-//       const months = trendStats.length;
-//       const avgJobsPerMonth = months > 0 ? totalJobs / months : 0;
-  
-//       res.json({
-//         statusStats,
-//         trendStats,
-//         additionalMetrics: {
-//           totalJobs,
-//           months,
-//           avgJobsPerMonth
-//         }
-//       });
-//     } catch (error) {
-//       res.status(500).json({ message: "Error fetching stats", error: error.message });
-//     }
-//   });
   
