@@ -18,18 +18,22 @@ function Dashboard() {
     const token = localStorage.getItem('token');
     axios.get('/api/jobs', { headers: { Authorization: `Bearer ${token}` } })
       .then(response => { 
-        console.log('Fetched jobs:', response.data);
         setJobs(response.data);
       })
       .catch(error => console.error('Error fetching jobs:', error));
   }, []);
 
-  // Handlers for modal actions
-  const openAddModal = () => {
-    setModalMode('add');
-    setSelectedJob(null);
-    setIsModalOpen(true);
-  };
+    const openAddModal = () => {
+        if (!isModalOpen) {
+        setModalMode('add');
+        setSelectedJob(null);
+        setIsModalOpen(true);
+        } else {
+        // If modal is already open, just update mode/data
+        setModalMode('add');
+        setSelectedJob(null);
+        }
+    };
 
   const openEditModal = (job) => {
     setModalMode('edit');

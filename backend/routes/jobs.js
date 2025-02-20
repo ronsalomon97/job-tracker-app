@@ -50,21 +50,20 @@ router.get('/:id', authMiddleware, async (req, res) => {
     }
   });       
 
-  router.put('/:id' , authMiddleware, async(req, res) => {
-
+  router.put('/:id', authMiddleware, async (req, res) => {
     const { company, title, status, dateApplied, notes } = req.body;
     try {
-      const updatedJob = await job.findOneAndUpdate(
-      { _id: res.params.id, user: req.userId},
-      { company, title, status, dateApplied, notes},
-      { new: true }
+      const updatedJob = await Job.findOneAndUpdate(
+        { _id: req.params.id, user: req.userId },
+        { company, title, status, dateApplied, notes },
+        { new: true, runValidators: true } // This returns the updated document and validates the update
       );
-      if(!updatedJob){
-        return res.status(404).json({message: "job not found"});
+      if (!updatedJob) {
+        return res.status(404).json({ message: "Job not found" });
       }
       res.json(updatedJob);
     } catch (error) {
-        res.status(500).json({ message: "Error updating job", error: error.message });
+      res.status(500).json({ message: "Error updating job", error: error.message });
     }
   });
   
