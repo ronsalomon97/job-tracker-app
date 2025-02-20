@@ -15,9 +15,11 @@
     "chart.js": "^4.4.7",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-modal": "^3.16.3",
     "react-router-dom": "^7.1.5"
   },
   "devDependencies": {
+    "@babel/core": "^7.26.9",
     "@eslint/js": "^9.19.0",
     "@types/react": "^19.0.8",
     "@types/react-dom": "^19.0.3",

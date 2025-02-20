@@ -10,12 +10,12 @@ function JobFormModal({ mode, initialData, onSubmit, onClose }) {
         <div className="modal-container">
           <TransitionChild
             as={Fragment}
-            enter="modal-overlay-enter"
-            enterFrom="modal-overlay-from"
-            enterTo="modal-overlay-to"
-            leave="modal-overlay-leave"
-            leaveFrom="modal-overlay-leave-from"
-            leaveTo="modal-overlay-leave-to"
+            enter="transition-opacity duration-300"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+            leave="transition-opacity duration-200"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
           >
             <Dialog.Overlay className="modal-backdrop" />
           </TransitionChild>
@@ -25,12 +25,12 @@ function JobFormModal({ mode, initialData, onSubmit, onClose }) {
 
           <TransitionChild
             as={Fragment}
-            enter="modal-content-enter"
-            enterFrom="modal-content-from"
-            enterTo="modal-content-to"
-            leave="modal-content-leave"
-            leaveFrom="modal-content-leave-from"
-            leaveTo="modal-content-leave-to"
+            enter="transition-opacity duration-300"
+            enterFrom="opacity-0 scale-95"
+            enterTo="opacity-100 scale-100"
+            leave="transition-opacity duration-200"
+            leaveFrom="opacity-100 scale-100"
+            leaveTo="opacity-0 scale-95"
           >
             <div className="modal-content">
               <Dialog.Title className="modal-title">
