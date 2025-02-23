@@ -3,8 +3,14 @@ import React from 'react';
 import ReactModal from 'react-modal';
 import JobForm from './JobForm.jsx';
 
-// Set the app element for accessibility
-ReactModal.setAppElement('#root');
+// Set the app element to document.body to avoid inherited opacity from container elements.
+ReactModal.setAppElement(document.body);
+
+// Reset ReactModal default inline styles so that your CSS classes can fully control styling.
+ReactModal.defaultStyles = {
+  overlay: {},
+  content: {}
+};
 
 function JobFormModalAlt({ mode, initialData, onSubmit, onClose }) {
   return (

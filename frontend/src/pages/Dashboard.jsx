@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import JobCard from '../components/JobCard';
 import JobFormModalAlt from '../components/JobFormModalAlt';
+import LogoutButton from "../components/LogoutButton";
 
 function Dashboard() {
   // State for job data
@@ -70,6 +71,7 @@ function Dashboard() {
             <h1 className="dashboard-title">Job Tracker App</h1>
             <nav>
                 <a href="/analytics" className="text-blue-600 hover:underline">Analytics</a>
+                <LogoutButton />
             </nav>      
         </header>
 
