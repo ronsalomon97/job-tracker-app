@@ -21,13 +21,21 @@ function Analytics() {
       })
       .catch(error => console.error('Error fetching analytics:', error));
   }, []);
-
-  // Prepare Pie chart data based on statusStats.
+  
+  const statusColorMap = {
+    offer: '#48BB78',      // green
+    applied: '#4299E1',    // blue
+    interview: '#ECC94B',  // yellow
+    rejected: '#F56565'    // red
+  };
+  
   const pieData = {
     labels: stats && stats.statusStats ? stats.statusStats.map(item => item._id) : [],
     datasets: [{
       data: stats && stats.statusStats ? stats.statusStats.map(item => item.count) : [],
-      backgroundColor: ['#4299E1', '#48BB78', '#ED8936', '#ED64A6']
+      backgroundColor: stats && stats.statusStats 
+        ? stats.statusStats.map(item => statusColorMap[item._id] || '#A0AEC0')
+        : []
     }]
   };
 

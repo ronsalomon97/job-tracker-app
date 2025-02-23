@@ -4,11 +4,12 @@ import Job from '../models/Job.js';
 
 // Create a new job
 export const createJob = async (req, res) => {
-  const { company, title, status, dateApplied, notes } = req.body;
+  const { company, title, location , status, dateApplied, notes } = req.body;
   try {
     const newJob = new Job({
       company,
       title,
+      location,
       status,
       dateApplied,
       notes,
@@ -46,11 +47,11 @@ export const getJobById = async (req, res) => {
 
 // Update a specific job by ID
 export const updateJob = async (req, res) => {
-  const { company, title, status, dateApplied, notes } = req.body;
+  const { company, title, location , status, dateApplied, notes } = req.body;
   try {
     const updatedJob = await Job.findOneAndUpdate(
       { _id: req.params.id, user: req.userId },
-      { company, title, status, dateApplied, notes },
+      { company, title, location ,status, dateApplied, notes },
       { new: true, runValidators: true }
     );
     if (!updatedJob) {
