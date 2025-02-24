@@ -8,11 +8,13 @@ import LogoutButton from "../components/LogoutButton";
 function Dashboard() {
   // State for job data
   const [jobs, setJobs] = useState([]);
+  const [filterStatus, setFilterStatus] = useState('all');
 
   // Modal state: open flag, mode ('add' or 'edit'), and job to edit
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalMode, setModalMode] = useState('add');
   const [selectedJob, setSelectedJob] = useState(null);
+  
 
   // Fetch jobs from API on mount
   useEffect(() => {
@@ -23,6 +25,9 @@ function Dashboard() {
       })
       .catch(error => console.error('Error fetching jobs:', error));
   }, []);
+
+  const filteredJobs = filterStatus === 'all' ? jobs 
+  : jobs.filter(job => job.status === filterStatus);
 
     const openAddModal = () => {
         if (!isModalOpen) {
@@ -75,14 +80,31 @@ function Dashboard() {
             </nav>      
         </header>
 
+      {/* Filter Section */}
+      <div className='dashboard-filter'>
+        <label htmlFor="statusFilter" className="dashboard-filter__label">Filter by Status:</label>
+        <select
+            id="statusFilter"
+            value={filterStatus}
+            onChange={(e) => setFilterStatus(e.target.value)}
+            className="dashboard-filter__select"
+        >
+            <option value="all">All</option>
+            <option value="applied">Applied</option>
+            <option value="interview">Interview</option>
+            <option value="rejected">Rejected</option>
+            <option value="offer">Offer</option>
+        </select>
+      </div>
+    
       {/* Jobs Grid */}
       <div className="jobs-grid">
-        {jobs.map(job => (
+        {filteredJobs.map(job => (
           <JobCard key={job._id} job={job} onClick={() => openEditModal(job)} />
         ))}
       </div>
 
-      {jobs.length === 0 && (
+      {filteredJobs.length === 0 && (
         <div className="empty-jobs-message text-center text-gray-600 text-xl mt-8">
           No jobs available. Click the "+" button to add a new job.
         </div>
