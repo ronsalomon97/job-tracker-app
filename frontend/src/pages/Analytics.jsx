@@ -14,14 +14,14 @@ function Analytics() {
   // Fetch analytics data on component mount.
   useEffect(() => {
     const token = localStorage.getItem('token');
-    axios.get('/api/jobs/stats', { headers: { Authorization: `Bearer ${token}` } })
+    axios.get(`${import.meta.env.VITE_API_URL}/api/jobs/stats`, { headers: { Authorization: `Bearer ${token}` } })
       .then(response => {
         console.log('Fetched analytics stats:', response.data);
         setStats(response.data);
       })
       .catch(error => console.error('Error fetching analytics:', error));
   }, []);
-  
+
   const statusColorMap = {
     offer: '#48BB78',      // green
     applied: '#4299E1',    // blue

@@ -21,7 +21,7 @@ function Register(){
             return;
         }
         try {
-            await axios.post('/api/auth/register', { name, email, password });
+            await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/register`, { name, email, password });
             // On successful registration, redirect to login page
             navigate('/login');
         }

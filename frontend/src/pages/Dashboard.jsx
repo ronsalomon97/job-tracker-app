@@ -19,7 +19,7 @@ function Dashboard() {
   // Fetch jobs from API on mount
   useEffect(() => {
     const token = localStorage.getItem('token');
-    axios.get('/api/jobs', { headers: { Authorization: `Bearer ${token}` } })
+    axios.get(`${import.meta.env.VITE_API_URL}/api/jobs`, { headers: { Authorization: `Bearer ${token}` } })
       .then(response => { 
         setJobs(response.data);
       })
@@ -51,14 +51,14 @@ function Dashboard() {
     const token = localStorage.getItem('token');
 
     if (modalMode === 'add') {
-      axios.post('/api/jobs', jobData, { headers: { Authorization: `Bearer ${token}` } })
+      axios.post(`${import.meta.env.VITE_API_URL}/api/jobs`, jobData, { headers: { Authorization: `Bearer ${token}` } })
         .then(response => {
           setJobs([...jobs, response.data]);
           setIsModalOpen(false);
         })
         .catch(error => console.error('Error adding job:', error));
     } else if (modalMode === 'edit' && selectedJob) {
-      axios.put(`/api/jobs/${selectedJob._id}`, jobData, { headers: { Authorization: `Bearer ${token}` } })
+      axios.put(`${import.meta.env.VITE_API_URL}/api/jobs/${selectedJob._id}`, jobData, { headers: { Authorization: `Bearer ${token}` } })
         .then(response => {
           const updatedJobs = jobs.map(job => 
             job._id === response.data._id ? response.data : job
