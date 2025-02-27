@@ -32,15 +32,19 @@ services:
   frontend:
     image: job-tracker-frontend
     container_name: job-tracker-frontend
-    build: ./frontend
+    build:
+      context: ./frontend
+      args:
+        - VITE_API_URL=http://job-tracker-backend:5001
     ports:
       - "80:80"
     depends_on:
       - backend
     environment:
-      - VITE_API_URL=http://job-tracker-backend:5001  # ✅ API calls inside Docker
+      - VITE_API_URL=http://job-tracker-backend:5001
     networks:
       - job-tracker-network
+      
 
 volumes:
   mongo-data:
