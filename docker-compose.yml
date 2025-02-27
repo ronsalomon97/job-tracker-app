@@ -1,0 +1,46 @@
+version: '3.8'
+
+networks:
+  job-tracker-network:
+    driver: bridge
+
+services:
+  mongo:
+    image: mongo:latest
+    container_name: job-tracker-mongo
+    restart: always
+    ports:
+      - "27017:27017"
+    networks:
+      - job-tracker-network
+    volumes:
+      - mongo-data:/data/db
+
+  backend:
+    image: job-tracker-backend
+    container_name: job-tracker-backend
+    build: ./backend
+    ports:
+      - "5001:5001"
+    depends_on:
+      - mongo
+    env_file:
+      - ./backend/.env  # ✅ Load MONGO_URI and JWT_SECRET
+    networks:
+      - job-tracker-network
+
+  frontend:
+    image: job-tracker-frontend
+    container_name: job-tracker-frontend
+    build: ./frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    environment:
+      - VITE_API_URL=http://job-tracker-backend:5001  # ✅ API calls inside Docker
+    networks:
+      - job-tracker-network
+
+volumes:
+  mongo-data:

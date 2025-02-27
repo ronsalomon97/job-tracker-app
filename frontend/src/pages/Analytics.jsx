@@ -1,7 +1,7 @@
 // src/pages/Analytics.jsx
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import API from '../api/axios'; // Updated import
 import { Pie, Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement } from 'chart.js';
 
@@ -13,8 +13,7 @@ function Analytics() {
 
   // Fetch analytics data on component mount.
   useEffect(() => {
-    const token = localStorage.getItem('token');
-    axios.get(`${import.meta.env.VITE_API_URL}/api/jobs/stats`, { headers: { Authorization: `Bearer ${token}` } })
+    API.get('/api/jobs/stats')
       .then(response => {
         console.log('Fetched analytics stats:', response.data);
         setStats(response.data);

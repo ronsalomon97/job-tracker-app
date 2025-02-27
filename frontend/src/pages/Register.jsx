@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import API from '../api/axios'; // Updated import
 import { useNavigate, Link } from 'react-router-dom';
 
 function Register(){
@@ -21,7 +21,7 @@ function Register(){
             return;
         }
         try {
-            await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/register`, { name, email, password });
+            await API.post('/api/auth/register', { name, email, password }); // Updated request
             // On successful registration, redirect to login page
             navigate('/login');
         }

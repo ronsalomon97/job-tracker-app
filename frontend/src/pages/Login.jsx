@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import API from '../api/axios'; // Updated import
 import { useNavigate, Link } from 'react-router-dom';
 
 function Login () {
@@ -16,12 +16,12 @@ function Login () {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('/api/auth/login', { email, password });
+            const response = await API.post('/api/auth/login', { email, password }); // Updated request
             // Save token to localStorage
             localStorage.setItem('token', response.data.token);
             // Optionally, store user info if needed:
             localStorage.setItem('user', JSON.stringify(response.data.user));
-            // Redirect to dashboard
+            // Redireact to dashboard
             navigate('/');
             }
             catch(error){

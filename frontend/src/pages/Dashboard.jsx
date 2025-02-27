@@ -1,6 +1,6 @@
 // src/pages/Dashboard.jsx
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import API from '../api/axios'; // Updated import
 import JobCard from '../components/JobCard';
 import JobFormModalAlt from '../components/JobFormModalAlt';
 import LogoutButton from "../components/LogoutButton";
@@ -18,13 +18,13 @@ function Dashboard() {
 
   // Fetch jobs from API on mount
   useEffect(() => {
-    const token = localStorage.getItem('token');
-    axios.get(`${import.meta.env.VITE_API_URL}/api/jobs`, { headers: { Authorization: `Bearer ${token}` } })
-      .then(response => { 
-        setJobs(response.data);
-      })
-      .catch(error => console.error('Error fetching jobs:', error));
+    API.get('/api/jobs') // Updated request
+    .then(response => { 
+      setJobs(response.data);
+    })
+    .catch(error => console.error('Error fetching jobs:', error));
   }, []);
+  
 
   const filteredJobs = filterStatus === 'all' ? jobs 
   : jobs.filter(job => job.status === filterStatus);
@@ -51,14 +51,14 @@ function Dashboard() {
     const token = localStorage.getItem('token');
 
     if (modalMode === 'add') {
-      axios.post(`${import.meta.env.VITE_API_URL}/api/jobs`, jobData, { headers: { Authorization: `Bearer ${token}` } })
-        .then(response => {
+      API.post('/api/jobs', jobData) // Updated request
+      .then(response => {
           setJobs([...jobs, response.data]);
           setIsModalOpen(false);
         })
         .catch(error => console.error('Error adding job:', error));
     } else if (modalMode === 'edit' && selectedJob) {
-      axios.put(`${import.meta.env.VITE_API_URL}/api/jobs/${selectedJob._id}`, jobData, { headers: { Authorization: `Bearer ${token}` } })
+      API.put(`/api/jobs/${selectedJob._id}`, jobData) // Updated request
         .then(response => {
           const updatedJobs = jobs.map(job => 
             job._id === response.data._id ? response.data : job
