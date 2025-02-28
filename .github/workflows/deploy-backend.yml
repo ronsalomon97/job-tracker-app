@@ -15,16 +15,16 @@ jobs:
 
     - name: Setup SSH Key
       env:
-        SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
+        SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
       run: |
         mkdir -p ~/.ssh
-        echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+        echo "${{ secrets.EC2_SSH_PRIVATE_KEY }}" | tr -d '\r' > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
         ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
 
     - name: Deploy to EC2
       run: |
-        ssh ubuntu@${{ secrets.EC2_HOST }} << 'EOF'
+        ssh ec2-user@${{ secrets.EC2_HOST }} << 'EOF'
           cd ~/job-tracker-app/backend
 
           echo "Pulling latest changes..."
@@ -34,7 +34,11 @@ jobs:
           npm install --production
 
           echo "Restarting backend server..."
-          pm2 restart backend || pm2 start index.js --name backend
+          if pm2 list | grep -q backend; then
+            pm2 restart backend
+          else
+            pm2 start index.js --name backend
+          fi
 
           echo "Deployment completed!"
         EOF
