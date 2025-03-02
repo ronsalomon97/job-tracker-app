@@ -34,8 +34,8 @@ Welcome to **Job Tracker**! This application helps you **manage, track, and anal
 ---
 
 
-🔗 Live Demo
-Visit the Live Website (Link will be updated soon)
+**🔗 Live Demo
+**Visit the Live Website (Link will be updated soon)
 
 
 ## 🎯 Local Development Setup
