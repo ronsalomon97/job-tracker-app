@@ -1,10 +1,11 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: import.meta.env.VITE_API_URL,
-});
+    baseURL: import.meta.env.VITE_API_URL?.replace(/\/$/, ""), // Removes trailing slash if exists
+  });
 
 console.log("VITE_API_URL Loaded:", import.meta.env.VITE_API_URL);
+
 API.interceptors.request.use(config => {
   const token = localStorage.getItem("token");
   if (token) {

@@ -11,7 +11,7 @@ frontend/.env
 .vercel
 
 # Ignore SSH Key
-Job-Tracker-Key-Pair.pem
+new-key.pem
 
 # Ignore System Files
 .DS_Store
