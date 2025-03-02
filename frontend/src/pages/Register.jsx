@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import API from '../api/axios'; // Updated import
+import API from '../api/axios'; 
 import { useNavigate, Link } from 'react-router-dom';
 
 function Register(){
@@ -21,7 +21,7 @@ function Register(){
             return;
         }
         try {
-            await API.post('/api/auth/register', { name, email, password }); // Updated request
+            await API.post('/api/auth/register', { name, email, password }); 
             // On successful registration, redirect to login page
             navigate('/login');
         }

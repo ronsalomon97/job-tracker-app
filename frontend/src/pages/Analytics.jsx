@@ -1,7 +1,6 @@
-// src/pages/Analytics.jsx
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import API from '../api/axios'; // Updated import
+import API from '../api/axios'; 
 import { Pie, Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement } from 'chart.js';
 
@@ -42,7 +41,6 @@ function Analytics() {
   const barLabels = stats && stats.trendStats 
     ? stats.trendStats.map(item => {
         const { year, month } = item._id;
-        // Format as "MM/YYYY" (you can adjust format as needed).
         return `${month}/${year}`;
       })
     : [];

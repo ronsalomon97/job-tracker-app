@@ -1,4 +1,3 @@
-// backend/controllers/jobController.js
 import mongoose from 'mongoose';
 import Job from '../models/Job.js';
 

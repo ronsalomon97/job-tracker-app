@@ -1,6 +1,5 @@
-// src/pages/Dashboard.jsx
 import React, { useState, useEffect } from 'react';
-import API from '../api/axios'; // Updated import
+import API from '../api/axios'; 
 import JobCard from '../components/JobCard';
 import JobFormModalAlt from '../components/JobFormModalAlt';
 import LogoutButton from "../components/LogoutButton";
@@ -18,7 +17,7 @@ function Dashboard() {
 
   // Fetch jobs from API on mount
   useEffect(() => {
-    API.get('/api/jobs') // Updated request
+    API.get('/api/jobs') 
     .then(response => { 
       setJobs(response.data);
     })
@@ -51,14 +50,14 @@ function Dashboard() {
     const token = localStorage.getItem('token');
 
     if (modalMode === 'add') {
-      API.post('/api/jobs', jobData) // Updated request
+      API.post('/api/jobs', jobData) 
       .then(response => {
           setJobs([...jobs, response.data]);
           setIsModalOpen(false);
         })
         .catch(error => console.error('Error adding job:', error));
     } else if (modalMode === 'edit' && selectedJob) {
-      API.put(`/api/jobs/${selectedJob._id}`, jobData) // Updated request
+      API.put(`/api/jobs/${selectedJob._id}`, jobData) 
         .then(response => {
           const updatedJobs = jobs.map(job => 
             job._id === response.data._id ? response.data : job

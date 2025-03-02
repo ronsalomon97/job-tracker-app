@@ -1,4 +1,3 @@
-// src/components/JobFormModalAlt.jsx
 import React from 'react';
 import ReactModal from 'react-modal';
 import JobForm from './JobForm.jsx';
