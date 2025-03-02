@@ -1,10 +1,13 @@
 import axios from "axios";
 
-const API = axios.create({
-    baseURL: import.meta.env.VITE_API_URL?.replace(/\/$/, ""), // Removes trailing slash if exists
-  });
+// Ensure no double "/api/api" issue & provide fallback for local development
+const baseURL = (import.meta.env.VITE_API_URL || "http://localhost:5001").replace(/\/$/, "");
 
-console.log("VITE_API_URL Loaded:", import.meta.env.VITE_API_URL);
+const API = axios.create({
+  baseURL: baseURL, // ✅ Removes trailing slash to avoid duplicate "/api/api"
+});
+
+console.log("VITE_API_URL Loaded:", baseURL);
 
 API.interceptors.request.use(config => {
   const token = localStorage.getItem("token");

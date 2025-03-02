@@ -8,8 +8,18 @@ connectDB();
 
 const app = express();
 app.use(express.json());
-app.use(cors({ origin: '*' }));
 
+//Allow Local & Vercel Frontend
+const allowedOrigins = [
+  "http://localhost:5173",  // Local frontend
+  "https://job-tracker-nni0jerup-ron-salomons-projects.vercel.app",  // Vercel frontend
+];
+
+app.use(cors({
+  origin: allowedOrigins,
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  credentials: true, // Allows cookies, auth headers
+}));
 
 // Import your routes
 import authRoutes from './routes/auth.js';
@@ -26,4 +36,4 @@ app.get('/', (req, res) => {
 const PORT = process.env.PORT || 5001;
 console.log("Attempting to start server...");
 console.log("PORT:", PORT);
-app.listen(PORT, '0.0.0.0' , () => console.log(`Server running on port ${PORT}`));
+app.listen(PORT, '0.0.0.0', () => console.log(`Server running on port ${PORT}`));
