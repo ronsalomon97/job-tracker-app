@@ -1,4 +1,21 @@
 import jwt from 'jsonwebtoken';
+const cors = require('cors');
+
+// Define allowed origins for CORS
+const allowedOrigins = [
+    "http://localhost:5173",  // Local frontend
+    "https://job-tracker-nni0jerup-ron-salomons-projects.vercel.app",  // Vercel frontend
+];
+
+// CORS configuration middleware
+const corsOptions = {
+    origin: allowedOrigins,
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    credentials: true, // Allows cookies, auth headers
+};
+
+// Middleware to handle CORS
+const corsMiddleware = cors(corsOptions);
 
 const authMiddleware = (req, res, next) => {
     const token = req.headers.authorization && req.headers.authorization.split(' ')[1];
@@ -16,4 +33,4 @@ const authMiddleware = (req, res, next) => {
     }
 };
 
-export default authMiddleware;
+export { corsMiddleware, authMiddleware };
