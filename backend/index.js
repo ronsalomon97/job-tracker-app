@@ -27,8 +27,8 @@ import authRoutes from './routes/auth.js';
 import jobRoutes from './routes/jobs.js';
 
 // Mount the routes with proper prefixes
-app.use('/api/auth', authRoutes);
-app.use('/api/jobs', jobRoutes);
+app.use('/auth', authRoutes);
+app.use('/jobs', jobRoutes);
 
 app.get('/', (req, res) => {
   res.send("API is running...");
