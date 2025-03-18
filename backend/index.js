@@ -12,7 +12,8 @@ app.use(express.json());
 //Allow Local & Vercel Frontend
 const allowedOrigins = [
   "http://localhost:5173",  // Local frontend
-  "https://job-tracker-nni0jerup-ron-salomons-projects.vercel.app",  // Vercel frontend
+  "https://job-tracker-app-sigma.vercel.app",  // Vercel frontend
+  "https://job-tracker-nni0jerup-ron-salomons-projects.vercel.app"  // Vercel frontend (if needed)
 ];
 
 app.use(cors({
