@@ -17,7 +17,7 @@ const allowedOrigins = [
 ];
 
 app.use(cors({
-  origin: allowedOrigins,
+  origin: '*',
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   credentials: true, // Allows cookies, auth headers
 }));
@@ -27,8 +27,8 @@ import authRoutes from './routes/auth.js';
 import jobRoutes from './routes/jobs.js';
 
 // Mount the routes with proper prefixes
-app.use('/auth', authRoutes);
-app.use('/jobs', jobRoutes);
+app.use('/api/auth', authRoutes);
+app.use('/api/jobs', jobRoutes);
 
 app.get('/', (req, res) => {
   res.send("API is running...");
