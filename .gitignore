@@ -12,6 +12,7 @@ frontend/.env
 
 # Ignore SSH Key
 new-key.pem
+fixed-key.pem
 
 # Ignore System Files
 .DS_Store

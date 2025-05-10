@@ -1,5 +1,4 @@
 import axios from "axios";
-
 // Ensure no double "/api/api" issue & provide fallback for local development
 const baseURL = (import.meta.env.VITE_API_URL || "http://localhost:5001").replace(/\/$/, "");
 
