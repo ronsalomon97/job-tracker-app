@@ -2,10 +2,15 @@
 
 Welcome to **Job Tracker**! This application helps you **manage, track, and analyze** your job applications efficiently.
 
-<img width="1440" alt="Dashboard" src="https://github.com/user-attachments/assets/cd3a67a4-142d-4410-9e03-d065524e5865" />
-<img width="1440" alt="Edit Job Ticket" src="https://github.com/user-attachments/assets/557a8579-8da0-4781-b9fe-82c86ef96e07" />
-<img width="1440" alt="Analytics 1" src="https://github.com/user-attachments/assets/b7540340-4671-4994-b66f-49d673a88523" />
-<img width="1440" alt="Analytics 2" src="https://github.com/user-attachments/assets/d8aa963b-ae2b-415f-9fb8-fb376c702239" />
+## 📸 Preview
+
+| Dashboard | Edit Job |
+|-----------|----------|
+| <img width="600" alt="Dashboard" src="https://github.com/user-attachments/assets/cd3a67a4-142d-4410-9e03-d065524e5865" /> | <img width="600" alt="Edit Job Ticket" src="https://github.com/user-attachments/assets/557a8579-8da0-4781-b9fe-82c86ef96e07" /> |
+
+| Analytics 1 | Analytics 2 |
+|-------------|-------------|
+| <img width="600" alt="Analytics 1" src="https://github.com/user-attachments/assets/b7540340-4671-4994-b66f-49d673a88523" /> | <img width="600" alt="Analytics 2" src="https://github.com/user-attachments/assets/d8aa963b-ae2b-415f-9fb8-fb376c702239" /> |
 
 
 ## Features
